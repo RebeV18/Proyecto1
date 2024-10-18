@@ -149,7 +149,8 @@ Se aplica descuento por cupón de descuento usando la constante DESCUENTO_C
 Se multiplica el precio original del producto por el descuento por cupón y se guarda en la variable costo.
 Se utiliza la estructura de control condicional Si/Entonces para imprimir el descuento aplicado en pantalla.
 
-	costo <- precio_original * DESCUENTO_C;
+	Definir costo Como Real;
+ 	costo <- precio_original * DESCUENTO_C;
 	Escribir "Precio Original:         ", precio_original
 	//Se imprime descuento
 	Si costo < precio_original Entonces
