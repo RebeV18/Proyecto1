@@ -226,16 +226,16 @@ Se reutiliza la variable subtotal para almacenar solo el descuento que se restar
 Se usa una estructura de control condicional Si/Entonces para imprimir el descuento aplicado.
 
 
-	subtotal <- (costo * (1 - DESCUENTO_Q));
-	costo <- (costo * DESCUENTO_Q);
-	//Se imprime descuento por cantidad
-	Si cantidad > 1
-		Escribir "Descuento por cantidad    -", subtotal
-	SiNo
-		Escribir "Descuento por cantidad    -", "0"
-	FinSi
-	
-	Escribir "                        ________";
+		subtotal <- (costo * (1 - DESCUENTO_Q));
+		costo <- (costo * DESCUENTO_Q);
+		//Se imprime descuento por cantidad
+		Si cantidad > 1
+			Escribir "Descuento por cantidad    -", subtotal
+		SiNo
+			Escribir "Descuento por cantidad    -", "0"
+		FinSi
+		
+		Escribir "                        ________";
 
 
 
@@ -298,6 +298,8 @@ Se llena el arreglo bidimencional con los valores conforme la distancia entre lo
 	costoDistancia[2,2] <- 1
 
 El arreglo se vería de la siguiente manera si le colocamos etiquetas:
+
+![Precios Envio](https://github.com/user-attachments/assets/4a6c30f0-0cd5-4e39-83ba-81e4291642fa)
 
 
 
