@@ -23,12 +23,12 @@ Mostrar el costo final del producto, desglosando los diferentes componentes (des
 Se inicializa en 0 el precio original del producto.
 Se usa un bucle Mientras para repetir la solicitud de ingresar el precio original hasta que el valor sea un precio mayor a $1.
 
-	Definir precio_original Como Real;
-	precio_original <- 0
-	Mientras precio_original < 1 Hacer
-		Escribir "Por favor, ingrese el precio original del producto en números: $";
-		Leer precio_original;
-	FinMientras 
+		Definir precio_original Como Real;
+		precio_original <- 0
+		Mientras precio_original < 1 Hacer
+			Escribir "Por favor, ingrese el precio original del producto en números: $";
+			Leer precio_original;
+		FinMientras 
 
 
 
@@ -38,25 +38,25 @@ DESCUENTO_C número real que guarda el descuento que se aplicará por concepto d
 validado número entero que almacena el valor que retorna la función validarCupon que puede ser 5 o 10.
 Se usa la estructura de control condicional Si/Entonces para asignar el valor correspondiente al descuento por cupón.
  	
-	Escribir "Si tiene un cupon de descuento que inicie con A10 o A5 digítelo, por favor. Sino digite 0.";
-	Definir cuponDescuento Como Caracter;
-	cuponDescuento <- "0";
-	Leer cuponDescuento;
-	
-	//Se valida el cupón de descuento en el arreglo de cupones
-	Definir DESCUENTO_C Como Real;
-	Definir validado Como Entero;
-	validado <- validarCupon(cuponDescuento);
-	si validado = 10 Entonces
-		DESCUENTO_C <- 0.9;
-	SiNo
-		si validado = 5 Entonces
-			DESCUENTO_C <- 0.95;
+		Escribir "Si tiene un cupon de descuento que inicie con A10 o A5 digítelo, por favor. Sino digite 0.";
+		Definir cuponDescuento Como Caracter;
+		cuponDescuento <- "0";
+		Leer cuponDescuento;
+		
+		//Se valida el cupón de descuento en el arreglo de cupones
+		Definir DESCUENTO_C Como Real;
+		Definir validado Como Entero;
+		validado <- validarCupon(cuponDescuento);
+		si validado = 10 Entonces
+			DESCUENTO_C <- 0.9;
 		SiNo
-			DESCUENTO_C <- 1;
-		FinSi
-	FinSi 
-
+			si validado = 5 Entonces
+				DESCUENTO_C <- 0.95;
+			SiNo
+				DESCUENTO_C <- 1;
+			FinSi
+		FinSi 
+	
 
 
 Se llama la función validarCupon que recibe la cadena del cupón de descuento como parámetro y valida si el cupón ingresado existe. En caso que sea válido se devuelve el valor del descuento, sea 5% o 10% que se ocupará para asignar el valor a DESCUENTO_C.
@@ -81,7 +81,7 @@ Se utilizan 2 bucles Para para llenar el arreglo de cupones. El primer Para se e
 	
 
 
-valido número entero que guarda el valor de descuento que la función retornará y se inicializa en 0.
+Se declara valido como número entero que guarda el valor de descuento que la función retornará y se inicializa en 0.
 
 
 	Definir valido Como Entero;
@@ -92,15 +92,15 @@ valido número entero que guarda el valor de descuento que la función retornar�
 
 Se busca en el arreglo si el cupón ingresado por el usuario existe usando un bucle Para, este bucle se ejecuta 10 veces buscando en el arreglo una cadena que sea igual a la cadena ingresada como cupón.
 		
-	Para i <- 0 Hasta 9 Con Paso 1 Hacer
-		Si cupones[i] = cupon Entonces
-			si i < 5 Entonces
-				valido <- 10;
-			SiNo
-				valido <- 5;
+		Para i <- 0 Hasta 9 Con Paso 1 Hacer
+			Si cupones[i] = cupon Entonces
+				si i < 5 Entonces
+					valido <- 10;
+				SiNo
+					valido <- 5;
+				FinSi
 			FinSi
-		FinSi
-	FinPara
+		FinPara
  
 
 
@@ -117,12 +117,12 @@ Se solicita al usuario que ingrese la cantidad del producto la cual se guarda en
 Se hace uso del bucle Mientras para repetir la solicitud hasta que ingrese una cantidad igual o mayor a 1.
 
 
-	Definir cantidad Como Entero;
-	cantidad <- 0;
-	Mientras cantidad < 1 Hacer
-		Escribir "Por favor, ingrese la cantidad de productos en números: #";
-		Leer cantidad;
-	FinMientras
+		Definir cantidad Como Entero;
+		cantidad <- 0;
+		Mientras cantidad < 1 Hacer
+			Escribir "Por favor, ingrese la cantidad de productos en números: #";
+			Leer cantidad;
+		FinMientras
 
 
 
@@ -145,11 +145,11 @@ Por medio de la estrutura de control condicional Si/Entonces para asignar el val
 Se define la variable peso y se inicializa en 0. Se utiliza el bucle Mientras para solicitar el peso al usuario y que se repita hasta que ingrese un valor mayor a 0.
 
 
-	Definir peso Como Real;
-	Mientras peso <= 0 Hacer
-		Escribir "Ingrese el peso del producto en kilogramos, por favor, en números: ";
-		Leer peso;
-	FinMientras
+		Definir peso Como Real;
+		Mientras peso <= 0 Hacer
+			Escribir "Ingrese el peso del producto en kilogramos, por favor, en números: ";
+			Leer peso;
+		FinMientras
 
 
 
@@ -199,14 +199,14 @@ Se multiplica el precio original del producto por el descuento por cupón y se g
 Se utiliza la estructura de control condicional Si/Entonces para imprimir el descuento aplicado en pantalla.
 
 
-	costo <- precio_original * DESCUENTO_C;
-	Escribir "Precio Original:         ", precio_original
-	//Se imprime descuento
-	Si costo < precio_original Entonces
-		Escribir "Cupón de Descuento       -", (precio_original - costo)
-	SiNo
-		Escribir "Cupón de Descuento        -", "0"
-	FinSi
+		costo <- precio_original * DESCUENTO_C;
+		Escribir "Precio Original:         ", precio_original
+		//Se imprime descuento
+		Si costo < precio_original Entonces
+			Escribir "Cupón de Descuento       -", (precio_original - costo)
+		SiNo
+			Escribir "Cupón de Descuento        -", "0"
+		FinSi
 
 
 3. Se calcula y se suma el IVA al costo, además se imprime usando la variable subtotal para almacenar solo el valor del IVA sumado.
@@ -253,36 +253,36 @@ Se llama a la función calcularCostoEnvio que calcula el costo de envío del pro
 Posteriormente se imprime el costo de envío.
 
 
-	Definir costoEnvio Como Real;
-	costoEnvio <- calcularCostoEnvio(peso, origen, destino);
-	Escribir "Costo de envío            ", costoEnvio
+		Definir costoEnvio Como Real;
+		costoEnvio <- calcularCostoEnvio(peso, origen, destino);
+		Escribir "Costo de envío            ", costoEnvio
 
 		
 - Función calcularCostoEnvio:
 Se declara la variable calculoEnvio como número real para guardar el valor total del envío, se inicializa en 0.
 Se declara la constante COSTO_FIJO y se le asigna el valor fijo de envío 10. 
 	
-	Definir calculoEnvio Como Real;
-	calculoEnvio <- 0;
-	Definir COSTO_FIJO Como Real;
-	COSTO_FIJO <- 10;
+		Definir calculoEnvio Como Real;
+		calculoEnvio <- 0;
+		Definir COSTO_FIJO Como Real;
+		COSTO_FIJO <- 10;
 	
 
 
 Se define la variable costoVariable como real para guardar el costo variable.
 Se llama la función calculoCostoDistancia para determinar el costo de acuerdo a la distancia entre origen y destino. La función recibe como parámetros el origen y el destino y devuelve el costo.
 Posteriormente se multiplica el peso por el valor encontrado que corresponde a costo por distancia y se almacena en la variable costoVariable. 
-	
-	Definir costoVariable Como Real;
-	costoVariable <- calculoCostoDistancia(origen-1, destino-1)
-	costoVariable <- (costoVariable * peso);
+		
+		Definir costoVariable Como Real;
+		costoVariable <- calculoCostoDistancia(origen-1, destino-1)
+		costoVariable <- (costoVariable * peso);
 
 
 - Función calculoCostoDistancia:
 Se define el arreglo bidimensional costoDistancia como entero y se dimensiona a 3x3 ya que se ofrecen solo 3 destinos y origenes para envíos.
 
-	Definir costoDistancia Como Entero;
-	Dimension costoDistancia[3,3];
+		Definir costoDistancia Como Entero;
+		Dimension costoDistancia[3,3];
 
 
 Se llena el arreglo bidimencional con los valores conforme la distancia entre los lugares de origen y destino.
