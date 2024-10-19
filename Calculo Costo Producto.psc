@@ -170,7 +170,7 @@ FinFuncion
 Funcion distancia <- calculoCostoDistancia(origen, destino)
 	//Función calcula valor por distancia
 	Definir costoDistancia Como Entero;
-	Dimension costoDistancia[4,4];
+	Dimension costoDistancia[3,3];
 	
 	//Se llena el arreglo bidimensional los valores de acuerdo al costo por distancia
 	costoDistancia[0,0] <- 0
