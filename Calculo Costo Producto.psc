@@ -3,16 +3,17 @@ Algoritmo calculoCostoProducto
 	Definir precio_original Como Real;
 	precio_original <- 0
 	Mientras precio_original < 1 Hacer
-		Escribir "Por favor, ingrese el precio original del producto en números: $";
+		Escribir "Por favor, ingrese el precio original del producto en nÃºmeros: $";
 		Leer precio_original;
 	FinMientras
 	
-	//Se solicita digitar cupón de descuento
-	Escribir "Si tiene un cupon de descuento que inicie con A10 o A5 digítelo, por favor. Sino digite 0.";
+	//Se solicita digitar cupÃ³n de descuento
+	Escribir "Si tiene un cupon de descuento que inicie con A10 o A5 digÃ­telo, por favor. Sino digite 0.";
 	Definir cuponDescuento Como Caracter;
+	cuponDescuento <- "0";
 	Leer cuponDescuento;
 	
-	//Se valida el cupón de descuento en el arreglo de cupones
+	//Se valida el cupÃ³n de descuento en el arreglo de cupones
 	Definir DESCUENTO_C Como Real;
 	Definir validado Como Entero;
 	validado <- validarCupon(cuponDescuento);
@@ -32,8 +33,9 @@ Algoritmo calculoCostoProducto
 	
 	//Se solicita cantidad mayor o igual a 1
 	Definir cantidad Como Entero;
+	cantidad <- 0;
 	Mientras cantidad < 1 Hacer
-		Escribir "Por favor, ingrese la cantidad de productos en números: #";
+		Escribir "Por favor, ingrese la cantidad de productos en nÃºmeros: #";
 		Leer cantidad;
 	FinMientras
 	//Se calcula descuento por cantidad
@@ -47,25 +49,41 @@ Algoritmo calculoCostoProducto
 	//Se solicita peso del producto.
 	Definir peso Como Real;
 	Mientras peso <= 0 Hacer
-		Escribir "Ingrese el peso del producto en kilogramos, por favor, en números: ";
+		Escribir "Ingrese el peso del producto en kilogramos, por favor, en nÃºmeros: ";
 		Leer peso;
 	FinMientras
-	//Se solicita destino.
-	Definir destino Como Caracter;
-	Repetir
-		Escribir "Ingrese la ciudad de destino del producto: ";
-		Leer destino;
-	Hasta Que destino <> ""
 	
-	//Se calcula precio original por cupón de descuento.
+	//Se solicita que escoja origen y destino del producto.
+	Definir origen Como Entero;
+	origen <- 0;
+	Repetir
+		Escribir "Escoja el origen del producto y digite el nÃºmero que corresponda:";
+		Escribir "1 Chile"
+		Escribir "2 SudamÃ©rica"
+		Escribir "3 NorteamÃ©rica"
+		Leer origen;
+	Hasta Que origen == 1 O origen == 2 O origen == 3
+	
+	Definir destino Como Entero;
+	destino  <- 0;
+	Repetir
+		Escribir "Escoja el origen del producto y digite el nÃºmero que corresponda:";
+		Escribir "1 Chile"
+		Escribir "2 SudamÃ©rica"
+		Escribir "3 NorteamÃ©rica"
+		Leer destino;
+	Hasta Que destino == 1 O destino == 2 O destino == 3
+	
+	
+	//Se calcula precio original por cupÃ³n de descuento.
 	Definir costo Como Real;
 	costo <- precio_original * DESCUENTO_C;
 	Escribir "Precio Original:         ", precio_original
 	//Se imprime descuento
 	Si costo < precio_original Entonces
-		Escribir "Cupón de Descuento       -", (precio_original - costo)
+		Escribir "CupÃ³n de Descuento       -", (precio_original - costo)
 	SiNo
-		Escribir "Cupón de Descuento        -", "0"
+		Escribir "CupÃ³n de Descuento        -", "0"
 	FinSi
 	
 	//Se calcula IVA y se multiplica costo por el IVA.
@@ -92,12 +110,12 @@ Algoritmo calculoCostoProducto
 	costo <- (costo * cantidad);
 	Escribir costo
 	
-	//Se llama la función que calcula el costo de envío y se imprime.
+	//Se llama la funciÃ³n que calcula el costo de envÃ­o y se imprime.
 	Definir costoEnvio Como Real;
-	costoEnvio <- calcularCostoEnvio(peso, destino);
-	Escribir "Costo de envío            ", costoEnvio
+	costoEnvio <- calcularCostoEnvio(peso, origen, destino);
+	Escribir "Costo de envÃ­o            ", costoEnvio
 	
-	//Se calcula costo total sumando costo + costo de envío
+	//Se calcula costo total sumando costo + costo de envÃ­o
 	costo <- costo + costoEnvio;
 	Escribir "                        ________";
 	Escribir "Costo total:             ", costo;
@@ -105,7 +123,7 @@ FinAlgoritmo
 
 
 Funcion valido <- validarCupon(cupon)
-	//Valida el cupón ingresado por el usuario.
+	//Valida el cupÃ³n ingresado por el usuario.
 	Definir cupones Como Caracter;
 	Dimension cupones[10];
 	Definir i Como Entero;
@@ -117,7 +135,7 @@ Funcion valido <- validarCupon(cupon)
 		cupones[i] <- Concatenar("A5", ConvertirATexto(i-5));
 	FinPara
 	
-	//Se busca en el arreglo si el cupón ingresado existe
+	//Se busca en el arreglo si el cupÃ³n ingresado existe
 	Definir valido Como Entero;
 	valido <- 0;
 	Para i <- 0 Hasta 9 Con Paso 1 Hacer
@@ -132,16 +150,39 @@ Funcion valido <- validarCupon(cupon)
 FinFuncion
 
 
-Funcion calculoEnvio <- calcularCostoEnvio(peso, destino)
-	//Calcula el costo de envío
+Funcion calculoEnvio <- calcularCostoEnvio(peso, origen, destino)
+	//Calcula el costo de envÃ­o
 	Definir calculoEnvio Como Real;
+	calculoEnvio <- 0;
 	Definir COSTO_FIJO Como Real;
 	COSTO_FIJO <- 10;
 	
 	//Se calcula costo variable
 	Definir costoVariable Como Real;
-	costoVariable <- (2 * peso);
+	costoVariable <- calculoCostoDistancia(origen-1, destino-1)
+	costoVariable <- (costoVariable * peso);
 	
 	//Se suma costo fijo + costo variable
 	calculoEnvio <- COSTO_FIJO + costoVariable;
+FinFuncion
+
+
+Funcion distancia <- calculoCostoDistancia(origen, destino)
+	//FunciÃ³n calcula valor por distancia
+	Definir costoDistancia Como Entero;
+	Dimension costoDistancia[4,4];
+	
+	//Se llena el arreglo bidimensional los valores de acuerdo al costo por distancia
+	costoDistancia[0,0] <- 0
+	costoDistancia[0,1] <- 1
+	costoDistancia[0,2] <- 2
+	costoDistancia[1,0] <- 1
+	costoDistancia[1,1] <- 1
+	costoDistancia[1,2] <- 3
+	costoDistancia[2,0] <- 2
+	costoDistancia[2,1] <- 3
+	costoDistancia[2,2] <- 1
+	
+	Definir distancia Como Entero;
+	distancia <- costoDistancia[origen,destino];
 FinFuncion
