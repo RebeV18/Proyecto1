@@ -1,7 +1,7 @@
 Algoritmo calculoCostoProducto
 	//Se solicita ingresar el precio original hasta que ingrese valor mayor a 0.
 	Definir precio_original Como Real;
-	precio_original <- 0
+	precio_original <- 0;
 	Mientras precio_original < 1 Hacer
 		Escribir "Por favor, ingrese el precio original del producto en números: $";
 		Leer precio_original;
@@ -48,6 +48,7 @@ Algoritmo calculoCostoProducto
 	
 	//Se solicita peso del producto.
 	Definir peso Como Real;
+	peso <- 0;
 	Mientras peso <= 0 Hacer
 		Escribir "Ingrese el peso del producto en kilogramos, por favor, en números: ";
 		Leer peso;
@@ -58,9 +59,9 @@ Algoritmo calculoCostoProducto
 	origen <- 0;
 	Repetir
 		Escribir "Escoja el origen del producto y digite el número que corresponda:";
-		Escribir "1 Chile"
-		Escribir "2 Sudamérica"
-		Escribir "3 Norteamérica"
+		Escribir "1 Chile";
+		Escribir "2 Sudamérica";
+		Escribir "3 Norteamérica";
 		Leer origen;
 	Hasta Que origen == 1 O origen == 2 O origen == 3
 	
@@ -68,9 +69,9 @@ Algoritmo calculoCostoProducto
 	destino  <- 0;
 	Repetir
 		Escribir "Escoja el origen del producto y digite el número que corresponda:";
-		Escribir "1 Chile"
-		Escribir "2 Sudamérica"
-		Escribir "3 Norteamérica"
+		Escribir "1 Chile";
+		Escribir "2 Sudamérica";
+		Escribir "3 Norteamérica";
 		Leer destino;
 	Hasta Que destino == 1 O destino == 2 O destino == 3
 	
@@ -78,12 +79,12 @@ Algoritmo calculoCostoProducto
 	//Se calcula precio original por cupón de descuento.
 	Definir costo Como Real;
 	costo <- precio_original * DESCUENTO_C;
-	Escribir "Precio Original:         ", precio_original
+	Escribir "Precio Original:         ", precio_original;
 	//Se imprime descuento
 	Si costo < precio_original Entonces
-		Escribir "Cupón de Descuento       -", (precio_original - costo)
+		Escribir "Cupón de Descuento       -", (precio_original - costo);
 	SiNo
-		Escribir "Cupón de Descuento        -", "0"
+		Escribir "Cupón de Descuento        -", "0";
 	FinSi
 	
 	//Se calcula IVA y se multiplica costo por el IVA.
@@ -91,29 +92,29 @@ Algoritmo calculoCostoProducto
 	subtotal <- (costo * (IVA - 1));
 	costo <- (costo * IVA);
 	//Se imprime el IVA.
-	Escribir "IVA                       ", subtotal
+	Escribir "IVA                       ", subtotal;
 	
 	//Se aplica descuento por cantidad cuando aplica.
 	subtotal <- (costo * (1 - DESCUENTO_Q));
 	costo <- (costo * DESCUENTO_Q);
 	//Se imprime descuento por cantidad
-	Si cantidad > 1
-		Escribir "Descuento por cantidad    -", subtotal
+	Si cantidad > 1 entonces
+		Escribir "Descuento por cantidad    -", subtotal;
 	SiNo
-		Escribir "Descuento por cantidad    -", "0"
+		Escribir "Descuento por cantidad    -", "0";
 	FinSi
 	
 	Escribir "                        ________";
-	Escribir cantidad " x ", costo, "                " Sin Saltar
+	Escribir cantidad, " x ", costo, "                " Sin Saltar;
 	
 	//Se multiplica costo por cantidad deseada y se imprime subtotal
 	costo <- (costo * cantidad);
-	Escribir costo
+	Escribir costo;
 	
 	//Se llama la función que calcula el costo de envío y se imprime.
 	Definir costoEnvio Como Real;
 	costoEnvio <- calcularCostoEnvio(peso, origen, destino);
-	Escribir "Costo de envío            ", costoEnvio
+	Escribir "Costo de envío            ", costoEnvio;
 	
 	//Se calcula costo total sumando costo + costo de envío
 	costo <- costo + costoEnvio;
@@ -159,7 +160,7 @@ Funcion calculoEnvio <- calcularCostoEnvio(peso, origen, destino)
 	
 	//Se calcula costo variable
 	Definir costoVariable Como Real;
-	costoVariable <- calculoCostoDistancia(origen-1, destino-1)
+	costoVariable <- calculoCostoDistancia(origen-1, destino-1);
 	costoVariable <- (costoVariable * peso);
 	
 	//Se suma costo fijo + costo variable
@@ -173,15 +174,15 @@ Funcion distancia <- calculoCostoDistancia(origen, destino)
 	Dimension costoDistancia[3,3];
 	
 	//Se llena el arreglo bidimensional los valores de acuerdo al costo por distancia
-	costoDistancia[0,0] <- 0
-	costoDistancia[0,1] <- 1
-	costoDistancia[0,2] <- 2
-	costoDistancia[1,0] <- 1
-	costoDistancia[1,1] <- 1
-	costoDistancia[1,2] <- 3
-	costoDistancia[2,0] <- 2
-	costoDistancia[2,1] <- 3
-	costoDistancia[2,2] <- 1
+	costoDistancia[0,0] <- 0;
+	costoDistancia[0,1] <- 1;
+	costoDistancia[0,2] <- 2;
+	costoDistancia[1,0] <- 1;
+	costoDistancia[1,1] <- 1;
+	costoDistancia[1,2] <- 3;
+	costoDistancia[2,0] <- 2;
+	costoDistancia[2,1] <- 3;
+	costoDistancia[2,2] <- 1;
 	
 	Definir distancia Como Entero;
 	distancia <- costoDistancia[origen,destino];
